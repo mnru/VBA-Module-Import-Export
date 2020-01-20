@@ -160,10 +160,6 @@ Sub addAll(sourcePath,targetPath)
 	dim oApp
     Set oApp = CreateObject("Excel.Application")
 	Set oFso=createObject("Scripting.FileSystemObject")
-    vbext_ct_StdModule = 1
-    vbext_ct_ClassModule = 2
-    vbext_ct_MSForm = 3
-    vbext_ct_Document = 100
     
     On Error Resume Next
     Set targetBook=oApp.workbooks.open(targetPath)
@@ -183,15 +179,3 @@ Sub addAll(sourcePath,targetPath)
     targetBook.Close
 	oApp.Quit
 End Sub
-
-sub test
-
-        tmp = getFixedPath
-        
-        'parentPath = tmp(0)
-        sourcePath = tmp(1)
-        targetPath = tmp(2)
-	call addAll(sourcePath,targetPath)
-	msgbox "finished"
-
-end sub
