@@ -29,6 +29,9 @@ Sub composeAll()
     xlOpenXMLAddIn = 55                ' //.xlam
     
     Set oApp = CreateObject("Excel.Application")
+    oApp.DisplayAlerts = false
+    oApp.EnableEvents  = false
+
     Set oFso = CreateObject("Scripting.FileSystemObject")
     
     
@@ -60,23 +63,9 @@ Sub composeAll()
         Set targetBook = oApp.Workbooks.Add
         Call targetBook.SaveAs(targetPath, xlOpenXMLWorkbookMacroEnabled)
     End If
-    
-    Set oSorceFdr = oFso.getFolder(sourcePath)
-    
-    
-    For Each fl In oSorceFdr.Files
-        pn = fl.path
-        sExt = LCase(oFso.GetExtensionName(pn))
-        
-        If (sExt = "cls" Or sExt = "frm" Or sExt = "bas") Then
-            Call lfToCrlf(pn)
-            Call targetBook.VBProject.VBComponents.Import(pn)
-        End If
-    Next
-    targetBook.Save
-    targetBook.Close
-	oApp.Quit
-    MsgBox "complete!"
+    targetBook.close
+	call	addAll(sourcePath,targetPath)    
+	MsgBox "complete!"
 End Sub
 
 Function getFolderPath()
@@ -165,3 +154,44 @@ Sub cleanAll(targetPath)
 	oApp.Quit
     On Error GoTo 0
 End Sub
+
+
+Sub addAll(sourcePath,targetPath)
+	dim oApp
+    Set oApp = CreateObject("Excel.Application")
+	Set oFso=createObject("Scripting.FileSystemObject")
+    vbext_ct_StdModule = 1
+    vbext_ct_ClassModule = 2
+    vbext_ct_MSForm = 3
+    vbext_ct_Document = 100
+    
+    On Error Resume Next
+    Set targetBook=oApp.workbooks.open(targetPath)
+
+    Set cmps = targetBook.VBProject.VBComponents
+	Set oFdr=oFso.getFolder(sourcePath)
+
+    For Each fl In oFdr.Files
+        sExt = LCase(oFso.GetExtensionName(fl))
+        
+        If (sExt = "cls" Or sExt = "frm" Or sExt = "bas") Then
+            Call lfToCrlf(fl)
+            Call targetBook.VBProject.VBComponents.Import(fl)
+        End If
+    Next
+    targetBook.Save
+    targetBook.Close
+	oApp.Quit
+End Sub
+
+sub test
+
+        tmp = getFixedPath
+        
+        'parentPath = tmp(0)
+        sourcePath = tmp(1)
+        targetPath = tmp(2)
+	call addAll(sourcePath,targetPath)
+	msgbox "finished"
+
+end sub
