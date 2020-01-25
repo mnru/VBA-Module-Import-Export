@@ -26,8 +26,8 @@ Fixed mode suposes like below folder location
 
 ###  decompose
 
-    when macro file xxxx.xlsmis selected,works below
-    (makes same name folder and src subfolder and decompose)
+    when select macro file xxxx.xlsm ,works below
+    (make same name folder xxxx and subfolder src and decompose)
 
 + yyyy
     + xxxx.xlsm
@@ -38,10 +38,10 @@ Fixed mode suposes like below folder location
 
 ### compose
 
-    when source folder xxxx is selected,works below
-    (if not exists, make folder bin and yyyy.xlsm are composed.
+    when select source folder xxxx ,works below
+    (if not exists, make folder bin and macro file yyyy.xlsm.
     (yyyy is parent folder name)
-    if yyyy.xlsm exists,the file is recomposed.)
+    if yyyy.xlsm exists,recompose it.)
 
  + yyyy
     + xxxx
@@ -49,4 +49,3 @@ Fixed mode suposes like below folder location
         + bbbb.cls
     + bin
         + yyyy.xlsm     
-
