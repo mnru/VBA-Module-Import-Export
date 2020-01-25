@@ -1,4 +1,4 @@
-Const isFixedMode = False
+Const isFixedMode = True
 Const toCRLF = True
 Const clean = False
 
