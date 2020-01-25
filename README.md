@@ -1,5 +1,5 @@
 # VBA-Module-Import-Export
-This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like modules of VBA compose/decompose script,but specialized for my use.
+This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like compose/decompose script for modules of VBA ,but specialized for my use.
 
 * works for excel macro file only.
 * before compose,in the source file lf is converted to crlf 
