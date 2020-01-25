@@ -27,7 +27,7 @@ Fixed mode suposes like below folder location
 ###  decompose
 
     when select macro file xxxx.xlsm ,works below
-    (make same name folder xxxx and subfolder src and decompose)
+    (make same name folder xxxx and subfolder src, and decompose)
 
 + yyyy
     + xxxx.xlsm
