@@ -2,7 +2,7 @@
 This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like compose/decompose script for modules of VBA ,but specialized for my use.
 
 * works for excel macro file only.
-* before compose,in the source file lfs are converted to crlfs 
+* before compose,lfs are converted to crlfs in the source file.
 * there is a constant isFixedMode in scripts 
     * When isFixedMode is true, suppose location of files and folder definite and works silently,
     * When isFixedMode  is false ,the dialog open and ask files and folder location.
