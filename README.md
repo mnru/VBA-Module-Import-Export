@@ -6,7 +6,9 @@ This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like compose/decompose 
 * there is a constant isFixedMode in scripts 
     * When isFixedMode is true, suppose location of files and folders are definite and works silently,
     * When isFixedMode  is false ,the dialog open and ask the location of target macrofile or source folder.
-    * Scripts Fix_xxxx and xxxx are almost all same but constant isFixedMode.
+* Scripts Fix_xxxx and xxxx are almost all same but constant isFixedMode.
+* Scripts Fix_xxxx_.vbs are for xlam scripts.
+
 
 ## When isFixedMode  is True 
 
