@@ -4,8 +4,8 @@ This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like compose/decompose 
 * works for excel macro file only.
 * before compose,lfs are converted to crlfs in the source file.
 * there is a constant isFixedMode in scripts 
-    * When isFixedMode is true, suppose location of files and folder definite and works silently,
-    * When isFixedMode  is false ,the dialog open and ask files and folder location.
+    * When isFixedMode is true, suppose location of files and folders are definite and works silently,
+    * When isFixedMode  is false ,the dialog open and ask the location of target macrofile or source folder.
     * Scripts Fix_xxxx and xxxx are almost all same but constant isFixedMode.
 
 ## When isFixedMode  is True 
