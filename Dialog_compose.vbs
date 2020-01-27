@@ -1,6 +1,8 @@
-Const isFixedMode = False
+Const fixedMode = False
 Const toCRLF = True
 Const clean = False
+Dim targetExt
+targetExt = "xlsm"
 
 Const vbext_ct_StdModule = 1
 Const vbext_ct_ClassModule = 2
@@ -15,6 +17,22 @@ Const xlExcel12 = 50            ' //.xlsb
 Const xlOpenXMLWorkbookMacroEnabled = 52  ' //.xlsm
 Const xlOpenXMLTemplateMacroEnabled = 53  ' //.xltm
 Const xlOpenXMLAddIn = 55          ' //.xlam
+
+function saveType(ext)
+
+select case lcase(ext)
+case "xls":ret=xlExcel9795
+case "xlt":ret=xlTemplate
+case "xla":ret=xlAddIn
+case "xlsb":ret=xlExcel12
+case "xlsm":ret=xlOpenXMLWorkbookMacroEnabled
+case "xltm":ret=xlOpenXMLTemplateMacroEnabled
+case "xlam":ret=xlOpenXMLAddIn
+case else:
+end select
+
+saveType=ret
+end function
 
 Call composeAll
 
@@ -34,17 +52,17 @@ Sub composeAll()
   Dim targetBook
  
   Set oApp = CreateObject("Excel.Application")
-  oApp.DisplayAlerts = False
-  oApp.EnableEvents = False
+'  oApp.DisplayAlerts = False
+'  oApp.EnableEvents = False
  
   Set oFso = CreateObject("Scripting.FileSystemObject")
  
-  If isFixedMode Then
-    tmp = getFixedPath
+  If fixedMode Then
+    tmp = getFixedPath(targetExt)
    
     parentPath = tmp(0)
     sourcePath = tmp(1)
-    'targetPath = tmp(2)
+    targetPath = tmp(2)
   Else
     sourcePath = getFolderPath
     If sourcePath = "" Then
@@ -52,18 +70,18 @@ Sub composeAll()
       Exit Sub
     End If
     parentPath = oFso.getParentFolderName(sourcePath)
-   
+    targetName = oFso.getFilename(parentPath) & "." & targetExt
+    targetPath = oFso.buildPath(parentPath, targetName)
   End If
-  targetName = oFso.getFilename(parentPath) & ".xlsm"
-  binPath = oFso.buildPath(parentPath, "bin")
-  If Not oFso.FolderExists(binPath) Then oFso.createFolder (binPath)
-  targetPath = oFso.buildPath(binPath, targetName)
- 
+  If not oFso.FolderExists(sourcePath) Then
+	msgbox "there is no sorce folder"
+	exit sub
+	end if
   If oFso.FileExists(targetPath) Then
       If clean Then Call cleanAll(targetPath)
   Else
     Set targetBook = oApp.Workbooks.Add
-    Call targetBook.SaveAs(targetPath, xlOpenXMLWorkbookMacroEnabled)
+    Call targetBook.SaveAs(targetPath, saveType(targetExt))
     targetBook.Close
   End If
   Call addAll(sourcePath, targetPath)
@@ -124,22 +142,6 @@ Sub lfToCrlf(pn)
   oStm.Close
 End Sub
 
-Function getFixedPath()
-  Dim oFso
-  Dim scriptPath
-  Dim targetPath
-  Dim sorcePath
-  Dim parentPath
- 
-  Set oFso = CreateObject("Scripting.FileSystemObject")
-  parentPath = Replace(WScript.ScriptFullName, WScript.ScriptName, "")
-  parentName = oFso.getFilename(parentPath)
- 
-  sourcePath = oFso.buildPath(parentPath, "src")
-  targetPath = oFso.buildPath(parentPath, "bin" & "\" & parentName & ".xlsm")
- 
-  getFixedPath = Array(parentPath, sourcePath, targetPath)
-End Function
 
 Sub cleanAll(targetPath)
   Dim oApp
@@ -193,3 +195,20 @@ Sub addAll(sourcePath, targetPath)
   targetBook.Close
   oApp.Quit
 End Sub
+
+Function getFixedPath(ext)
+    Dim oFso
+    Dim scriptPath
+    Dim targetPath
+    Dim sorcePath
+    Dim parentPath
+    
+    Set oFso = CreateObject("Scripting.FileSystemObject")
+    parentPath = Replace(WScript.ScriptFullName, WScript.ScriptName, "")
+    parentName = oFso.getFilename(parentPath)
+    
+    sourcePath = oFso.buildPath(parentPath, "src")
+    targetPath = oFso.buildPath(parentPath, parentName & "." & ext)
+    
+    getFixedPath = Array(parentPath, sourcePath, targetPath)
+End Function
