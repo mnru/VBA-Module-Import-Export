@@ -1,15 +1,16 @@
 # VBA-Module-Import-Export
 This is [vbac.wsf](https://github.com/vbaidiot/ariawase) like compose/decompose script for modules of VBA ,but specialized for my use.
 
+Install script for xlam is modified version of [VBAFormatter's](https://github.com/fuku2014/VBAFormatter) one.
 
 * works for excel macro file only.
 * before compose,lfs are converted to crlfs in the source file.
 * there is a constant isFixedMode in scripts 
     * When isFixedMode is true, suppose location of files and folders are definite and works silently,
     * When isFixedMode  is false ,the dialog open and ask the location of target macrofile or source folder.
-* Scripts Fix_xxxx and xxxx are almost all same but constant isFixedMode.
-* Scripts Fix_xxxx_.vbs are for xlam scripts.
+* Scripts compose and decompose are pretty different ,but only prefix different scripts are almost same but paremeters defined in the head of scripts.
 * In case targetFiles is not determined implicitly ,Its extension should be written as targetExt in the script .
+* Install.vbs and UnInstall.vbs can be used for xlam file.If folder composition is same as the fixed mode,they can be used as is. 
 
 ## When isFixedMode  is True 
 
@@ -19,7 +20,10 @@ Fixed mode suposes like below folder location
 + xxxx
     + Fix_compose.vbs
     + Fix_decompose.vbs
+    + (Install.vbs)
+    + (UnInstall.vbs)
     + xxxx.xlsm
+    + (xxxx.xlam)
     + src
         + aaaa.bas
         + bbbb.cls
