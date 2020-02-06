@@ -28,15 +28,15 @@ Fixed mode suposes like below folder location
         + aaaa.bas
         + bbbb.cls
     
-## When isFixedMode is False
+## When isFixedMode is False(Dialog mode)
 
 ###  decompose
 
-    when select macro file xxxx.xlsm ,works below
+    when you select excel file xxxx.xl* ,this script works below
     (make same name folder xxxx and subfolder src, and decompose)
 
 + yyyy
-    + xxxx.xlsm
+    + xxxx.xl*(various type of excel file)
     + xxxx
         + src
             + aaaa.bas
@@ -44,10 +44,12 @@ Fixed mode suposes like below folder location
 
 ### compose
 
-    when select source folder xxxx ,works below
+    when you select source folder xxxx ,this script works below
+
     (if not exists, make macro file yyyy.xlsm.
     (yyyy is parent folder name)
-    if yyyy.xlsm exists,recompose it.)
+    if yyyy.xlsm exists,recompose it.
+    extension is determined by parameter in the script.)
 
  + yyyy
     + xxxx
