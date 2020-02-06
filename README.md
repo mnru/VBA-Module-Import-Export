@@ -10,7 +10,8 @@ Install script for xlam is modified version of [VBAFormatter's](https://github.c
     * When isFixedMode  is false ,the dialog open and ask the location of target macrofile or source folder.
 * Scripts compose and decompose are pretty different ,but only prefix different scripts are almost same but paremeters defined in the head of scripts.
 * In case targetFiles is not determined implicitly ,Its extension should be written as targetExt in the script .
-* Install.vbs and UnInstall.vbs can be used for xlam file.If folder composition is same as the fixed mode,they can be used as is. 
+* Install.vbs and UnInstall.vbs can be used for xlam file.
+If folder composition is same as the fixed mode one,you can used it as is. 
 
 ## When isFixedMode  is True 
 
